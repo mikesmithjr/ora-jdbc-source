@@ -213,6 +213,7 @@ class T4CConnection extends PhysicalConnection implements BfileDBAccess, BlobDBA
     }
 
     void handleIOException(IOException ea) throws SQLException {
+        ea.printStackTrace();
         try {
             this.net.disconnect();
         } catch (Exception e) {

@@ -93,6 +93,7 @@ public class TcpNTAdapter implements NTAdapter {
                 } catch (SocketException localSocketException) {
                     throw new IOException(localSocketException.getMessage());
                 }
+                break;
             case 1:
                 str = (String) this.socketOptions.get(new Integer(1));
                 if (!str.equals("YES"))
@@ -107,6 +108,7 @@ public class TcpNTAdapter implements NTAdapter {
                 } catch (InvocationTargetException localInvocationTargetException) {
                     throw new IOException(localInvocationTargetException.getMessage());
                 }
+                break;
             case 3:
                 str = (String) this.socketOptions.get(new Integer(3));
                 try {
@@ -115,8 +117,9 @@ public class TcpNTAdapter implements NTAdapter {
                     throw new NetException(506);
                 }
                 setSocketTimeout(this.sockTimeout);
-                continue;
+                break;
             case 2:
+                break;
             }
         }
     }
