@@ -166,8 +166,8 @@ public class AnoComm implements AnoServices {
     private byte b(int paramInt, byte[] paramArrayOfByte) {
         byte k = 0;
         for (int m = paramArrayOfByte.length - 1; m >= 0; m--) {
-            k = (byte) (k + 1);
             paramArrayOfByte[k] = (byte) (paramInt >>> 8 * m & 0xFF);
+            k = (byte) (k + 1);
         }
         return k;
     }
