@@ -1,5 +1,7 @@
 package com.oscar.test.db.common;
 
-public class DBCommonTest {
+import junit.framework.TestCase;
+
+public class DBCommonTest extends TestCase{
 
 }
