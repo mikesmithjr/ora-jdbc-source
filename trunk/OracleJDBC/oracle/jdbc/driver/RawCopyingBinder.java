@@ -1,0 +1,14 @@
+package oracle.jdbc.driver;
+
+class RawCopyingBinder extends ByteCopyingBinder
+{
+  RawCopyingBinder()
+  {
+    RawBinder.init(this);
+  }
+}
+
+/* Location:           D:\oracle\product\10.2.0\client_1\jdbc\lib\ojdbc14.jar
+ * Qualified Name:     oracle.jdbc.driver.RawCopyingBinder
+ * JD-Core Version:    0.6.0
+ */

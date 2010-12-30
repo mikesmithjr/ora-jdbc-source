@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Specification-Title:    Oracle JDBC driver classes for use with JDK14
+Created-By: 1.4.2_08 (Sun Microsystems Inc.)
+Implementation-Title:   ojdbc14_g.jar
+Specification-Vendor:   Oracle Corporation
+Specification-Version:  Oracle JDBC Driver version - "10.2.0.1.0"
+Implementation-Version: Oracle JDBC Driver version - "10.2.0.1.0"
+Implementation-Vendor:  Oracle Corporation
+Implementation-Time:    Wed Jun 22 11:31:47 2005
+
