@@ -2106,11 +2106,11 @@ public class OracleDatabaseMetaData implements DatabaseMetaData {
     }
 
     public boolean ownUpdatesAreVisible(int type) throws SQLException {
-        return type != 1003;
+        return type != OracleResultSet.TYPE_FORWARD_ONLY;
     }
 
     public boolean ownDeletesAreVisible(int type) throws SQLException {
-        return type != 1003;
+        return type != OracleResultSet.TYPE_FORWARD_ONLY;
     }
 
     public boolean ownInsertsAreVisible(int type) throws SQLException {
@@ -2118,7 +2118,7 @@ public class OracleDatabaseMetaData implements DatabaseMetaData {
     }
 
     public boolean othersUpdatesAreVisible(int type) throws SQLException {
-        return type == 1005;
+        return type == OracleResultSet.TYPE_SCROLL_SENSITIVE;
     }
 
     public boolean othersDeletesAreVisible(int type) throws SQLException {

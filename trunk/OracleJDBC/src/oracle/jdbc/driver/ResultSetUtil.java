@@ -5,8 +5,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 class ResultSetUtil {
-    static final int[][] allRsetTypes = { { 0, 0 }, { 1003, 1007 }, { 1003, 1008 }, { 1004, 1007 },
-            { 1004, 1008 }, { 1005, 1007 }, { 1005, 1008 } };
+    static final int[][] allRsetTypes = { { 0, 0 },
+            { OracleResultSet.TYPE_FORWARD_ONLY, OracleResultSet.CONCUR_READ_ONLY },
+            { OracleResultSet.TYPE_FORWARD_ONLY, OracleResultSet.CONCUR_UPDATABLE },
+            { OracleResultSet.TYPE_SCROLL_INSENSITIVE, OracleResultSet.CONCUR_READ_ONLY },
+            { OracleResultSet.TYPE_SCROLL_INSENSITIVE, OracleResultSet.CONCUR_UPDATABLE },
+            { OracleResultSet.TYPE_SCROLL_SENSITIVE, OracleResultSet.CONCUR_READ_ONLY },
+            { OracleResultSet.TYPE_SCROLL_SENSITIVE, OracleResultSet.CONCUR_UPDATABLE } };
 
     private static final String _Copyright_2004_Oracle_All_Rights_Reserved_ = null;
 
