@@ -1,0 +1,92 @@
+Oracle JDBC阅读分析报告
+
+1. 游标处理
+   1) 游标分类
+      *1 不可向后滚动-只读
+      *2 不可向后滚动-可更新
+      *3 非敏感可滚动-只读
+      *4 非敏感可滚动-可更新
+      *5 敏感可滚动　-只读
+      *6 敏感可滚动　-可更新
+   3) 游标约束
+      * 除1以外所有游标类型均需要通过SQL语句模拟方式进行实现
+      * 需要对查询语句进行处理增加Rowid列：2,4,5,6
+      * 需要加入缓存处理：>= 3
+      * 支持刷新行数据：>=4
+      * 不能看到自己更新的数据：1,2
+      * 不能看到自己删除的数据：1,2
+      * 不能看到自己插入的数据：全部
+      * 不能看到其他人更新的数据：<=4
+      * 不能看到其他人删除的数据：全部
+      * 不能看到其他人插入的数据：全部
+      * 不能检测到自己或他人对当前数据进行更新：全部
+      * 不能检测到自己或他人对当前数据进行插入：全部
+      * 不能检测到自己或他人对当前数据进行删除：全部
+      * 不支持批量更新：无
+      
+   2) 游标实现方式
+      * 概况：
+            Oracle并没有真实实现6种不同模式的游标，而是采用基础类型结果集，再配合组合模式实现
+            6种不同类型的游标，基本结果集类型为：OracleResultSetImpl，可组合类型为：UpdatableResultSet、
+            ScrollableResultSet、SensitiveScrollableResultSet
+      
+      * UpdatableResultSet
+        # 在SQL查询语句投影列中增加RowID，用于做为更新Key值
+        # 读取数据时，判断当前读取的数据是否已经更新，如果已经更新则从更新缓存中进行获取
+        # 
+      
+      * ScrollableResultSet
+      
+      * SensitiveScrollableResultSet
+      
+      
+    4) 游标实现相关类
+      * ResultSetUtil：结果集工厂方法
+      * BaseResultSet：结果集处理基类
+        # OracleResultSetImpl：基本结果集实现
+        # UpdatableResultSet：可更新结果集
+        # ScrollableResultSet：可滚动结果集
+            @ SensitiveScrollableResultSet：敏感可滚动结果集
+        # 其他类型的结果集，和游标处理关联程度较小，暂不进行列举
+        
+
+2. SQL语法解析
+   1) 输入的SQL需要得到哪些信息
+
+
+3. 协议处理
+   1) 存储过程调用协议的输入参数
+   
+   2) SQL执行调用的输入参数
+   
+   3) 参数传输方式
+
+4. 杂项
+   1) 自动生成键
+      * 应用范围：
+         # INSERT语句
+         # 单语句
+      * 自动生成键分类：
+         # 返回RowID
+         # 返回指定ColumnNames所对应的自动生成数据的值
+         # 返回指定ColumnIndexes所对应的自动生成数据的值
+      * 实现机制
+         # 使用Returning机制进行实现
+      * 实现流程
+         # RowID
+           @ 原Insert语句  RETURNING ROWID INTO ?
+         # ColumnNames
+           @ 原Insert语句  RETURNING {ColumnName}+ INTO {?}+
+         # ColumnIndexes
+           @ JDBC层分析Insert语句得到TableName
+           @ 向后台发送select * from [TableName]得到指定Table的描述信息
+           @ 根据返回的列信息构造和ColumnNames相同的SQL语句
+      * 相关实现类
+         # AutoKeyInfo：负责对语句进行处理，生成Returning语句，对是否为
+                        Insert语句进行处理，分析Insert语句中要插入的表名
+         # PhysicalConnection：通过接口doDescribeTable获取AutoKeyInfo中表描述信息
+           @ T2CConnection：PhysicalConnection的OCI实现类
+           @ T4CConnection：PhysicalConnection的纯JAVA实现类
+   2) 大对象处理
+   
+   

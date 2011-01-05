@@ -1,3 +1,4 @@
+反编译过程中出错无法正常处理的类
 T4C8Oall.receive
 T4CTTIoauthenticate.receiveOsesskey
 T4CTTIoauthenticate.receiveOauth
